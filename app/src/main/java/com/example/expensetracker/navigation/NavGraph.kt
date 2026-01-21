@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.expensetracker.ui.login.LoginScreen
 
 @Composable
 fun AppNavGraph(
@@ -20,7 +21,15 @@ fun AppNavGraph(
     ) {
 
         composable(route = Screen.Login.route) {
-            Text("Login Screen")
+            LoginScreen(
+                onLoginSuccess = {
+                    navController.navigate(Screen.Expense.route){
+                        popUpTo(Screen.Login.route){
+                            inclusive = true
+                        }
+                    }
+                }
+            )
         }
         composable(route = Screen.Expense.route) {
             Text("Expense Screen")
